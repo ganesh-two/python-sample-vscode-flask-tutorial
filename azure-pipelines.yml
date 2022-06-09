@@ -49,6 +49,7 @@ stages:
     # The | symbol is a continuation character, indicating a multi-line script.
     # A single-line script can immediately follow "- script:".
     - script: |
+        source antenv/bin/activate
         pip install pytest pytest-azurepipelines
         pip install pytest-cov
         pytest --doctest-modules --junitxml=junit/test-results.xml --cov=. --cov-report=xml # Put commands to run tests here
