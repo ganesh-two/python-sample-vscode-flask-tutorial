@@ -55,12 +55,12 @@ stages:
         pytest --doctest-modules --junitxml=junit/test-results.xml --cov=. --cov-report=xml # Put commands to run tests here
       workingDirectory: $(projectRoot)
       displayName: 'Run tests'
+    - task: PublishTestResults@2
+      condition: succeededOrFailed()
+      inputs:
+        testResultsFiles: '**/test-*.xml'
+        testRunTitle: 'Publish test results for Python $(python.version)'
 
-    - script: |
-        echo Deleting .env
-        deactivate
-        rm -rf .env
-      displayName: 'Remove .env before zip'
     - task: ArchiveFiles@2
       displayName: 'Archive files'
       inputs:
